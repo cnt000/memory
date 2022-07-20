@@ -1,8 +1,6 @@
-import logo from "./logo.svg";
-import { Counter } from "./features/counter/Counter";
-import { AppShell, Header } from "@mantine/core";
-import "./App.css";
-import Card from "./component/Card";
+import { Counter } from './features/counter/Counter';
+import { AppShell, Header } from '@mantine/core';
+import Card from './component/Card';
 
 function App() {
   return (
@@ -16,16 +14,15 @@ function App() {
       styles={(theme) => ({
         main: {
           backgroundColor:
-            theme.colorScheme === "dark"
+            theme.colorScheme === 'dark'
               ? theme.colors.dark[8]
               : theme.colors.gray[0],
         },
       })}
     >
-      <div className="App">
+      <div className="App" style={{ width: '200px' }}>
         <Card imageUrl="https://source.unsplash.com/random" />
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <Counter />
           <p>
             Edit <code>src/App.tsx</code> and save to reload.

@@ -1,23 +1,18 @@
-stato iniziale
+# stato iniziale
 
 actions
 
-componenti:
+# componenti:
 
-  card back
-  card front
-  board
-  header
-  startGame
-  endGame
-  Game
-  Button
+card back
+card front
+board
+header
+startGame
+endGame
+Game
+Button
 
+App shell, board graphics
 
-  App shell, board graphics
-
-  storybook
-
-  prettier
-
-  css normalize
+css normalize + global style
