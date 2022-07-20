@@ -19,7 +19,7 @@ const Template: ComponentStory<typeof Card> = (args) => (
 );
 
 const baseArgs = {
-  imageUrl: 'https://source.unsplash.com/random',
+  imageUrl: '/images/palm.jpeg',
 };
 
 export const Back = Template.bind({});

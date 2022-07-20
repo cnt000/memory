@@ -14,5 +14,3 @@ Game
 Button
 
 App shell, board graphics
-
-css normalize + global style
