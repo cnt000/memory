@@ -1,58 +1,129 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import logo from "./logo.svg";
+import { Counter } from "./features/counter/Counter";
+import { AppShell, Header } from "@mantine/core";
+import "./App.css";
+import Card from "./component/Card";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <AppShell
+      padding="md"
+      header={
+        <Header height={60} p="xs">
+          {/* Header content */}
+        </Header>
+      }
+      styles={(theme) => ({
+        main: {
+          backgroundColor:
+            theme.colorScheme === "dark"
+              ? theme.colors.dark[8]
+              : theme.colors.gray[0],
+        },
+      })}
+    >
+      <div className="App">
+        <Card imageUrl="https://source.unsplash.com/random" />
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <Counter />
+          <p>
+            Edit <code>src/App.tsx</code> and save to reload.
+          </p>
+          <span>
+            <span>Learn </span>
+            <a
+              className="App-link"
+              href="https:reactjs.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              React
+            </a>
+            <span>, </span>
+            <a
+              className="App-link"
+              href="https:redux.js.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Redux
+            </a>
+            <span>, </span>
+            <a
+              className="App-link"
+              href="https:redux-toolkit.js.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Redux Toolkit
+            </a>
+            ,<span> and </span>
+            <a
+              className="App-link"
+              href="https:react-redux.js.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              React Redux
+            </a>
+          </span>
+        </header>
+      </div>
+    </AppShell>
   );
 }
+
+// function App() {
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <img src={logo} className="App-logo" alt="logo" />
+//         <Counter />
+//         <p>
+//           Edit <code>src/App.tsx</code> and save to reload.
+//         </p>
+//         <span>
+//           <span>Learn </span>
+//           <a
+//             className="App-link"
+//             href="https://reactjs.org/"
+//             target="_blank"
+//             rel="noopener noreferrer"
+//           >
+//             React
+//           </a>
+//           <span>, </span>
+//           <a
+//             className="App-link"
+//             href="https://redux.js.org/"
+//             target="_blank"
+//             rel="noopener noreferrer"
+//           >
+//             Redux
+//           </a>
+//           <span>, </span>
+//           <a
+//             className="App-link"
+//             href="https://redux-toolkit.js.org/"
+//             target="_blank"
+//             rel="noopener noreferrer"
+//           >
+//             Redux Toolkit
+//           </a>
+//           ,<span> and </span>
+//           <a
+//             className="App-link"
+//             href="https://react-redux.js.org/"
+//             target="_blank"
+//             rel="noopener noreferrer"
+//           >
+//             React Redux
+//           </a>
+//         </span>
+//       </header>
+//     </div>
+//   );
+// }
 
 export default App;

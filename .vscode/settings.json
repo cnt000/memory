@@ -1,0 +1,10 @@
+{
+  "git.ignoreLimitWarning": true,
+  "stylelint.enable": true,
+  "css.validate": false,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#bba001",
+    "titleBar.activeBackground": "#ffd700",
+    "titleBar.activeForeground": "#F6FBFB"
+  }
+}
