@@ -16,9 +16,38 @@ export const StyledCardInner = styled.div<CardProps>`
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 0.8s;
   transform-style: preserve-3d;
-  transform: ${(props) => (props.flipped ? 'rotateY(180deg);' : 'rotateY(0);')};
+  transform: rotateY(180deg);
+  animation: ${(props) =>
+    typeof props.flipped === 'undefined'
+      ? 'none'
+      : props.flipped
+      ? 'cardFlip 0.275s forwards linear;'
+      : 'cardUnFlip 0.275s forwards linear;'};
+
+  @keyframes cardFlip {
+    0% {
+      transform: rotateZ(0deg) rotateY(180deg);
+    }
+    50% {
+      transform: rotateZ(-10deg) rotateY(90deg);
+    }
+    100% {
+      transform: rotateZ(0deg) rotateY(0deg);
+    }
+  }
+
+  @keyframes cardUnFlip {
+    0% {
+      transform: rotateZ(0deg) rotateY(0deg);
+    }
+    50% {
+      transform: rotateZ(-10deg) rotateY(90deg);
+    }
+    100% {
+      transform: rotateZ(0deg) rotateY(180deg);
+    }
+  }
 `;
 
 export const StyledCardFront = styled.div<CardProps>`
@@ -43,7 +72,6 @@ export const StyledCardBack = styled.div`
   transform: rotateY(180deg);
   border-radius: 8px;
   overflow: hidden;
-  background-color: #e5e5f7;
   border: 2px solid #5e4065;
   background-image: linear-gradient(
       30deg,
@@ -96,36 +124,3 @@ export const StyledCardBack = styled.div`
   background-size: 20px 35px;
   background-position: 0 0, 0 0, 10px 18px, 10px 18px, 0 0, 10px 18px;
 `;
-
-// &.card--flipped {
-//   animation: cardFlip 3s forwards linear;
-// }
-// &.card--unflip {
-//   animation: cardUnFlip 1s forwards linear;
-// }
-
-// @keyframes cardFlip {
-// 0% {
-//   transform: rotateZ(0deg) rotateY(180deg);
-// } 
-// 50% {
-//   transform: rotateZ(-10deg) rotateY(90deg);
-// }
-// 100% {
-//   transform: rotateZ(0deg) rotateY(0deg);
-// }
-
-// }
-
-// @keyframes cardUnFlip {
-// 0% {
-//   transform: rotateZ(0deg) rotateY(0deg);
-// } 
-// 50% {
-//   transform: rotateZ(-10deg) rotateY(90deg);
-// }
-// 100% {
-//   transform: rotateZ(0deg) rotateY(180deg);
-// }
-
-// }
