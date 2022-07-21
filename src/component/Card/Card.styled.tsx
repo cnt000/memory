@@ -1,21 +1,50 @@
-import styled from "@emotion/styled";
-import { CardProps } from "./Card";
+import styled from '@emotion/styled';
+import { CardProps } from './Card';
+
+const baseColor = '#5e4065';
+const color2 = '#e5e5f7';
 
 export const StyledCard = styled.li`
   list-style: none;
-  border: 3px solid #5e4065;
-  border-radius: 6px;
-  overflow: hidden;
   cursor: pointer;
   aspect-ratio: 4/6;
-  opacity: 0.8;
-  transition: opacity 0.3s ease-in;
-  box-shadow: 4px 4px 4px #5e406577;
+  perspective: 1000px;
 `;
 
-export const StyledBack = styled.div`
+export const StyledCardInner = styled.div<CardProps>`
+  position: relative;
+  width: 100%;
   height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  transform: ${(props) => (props.flipped ? 'rotateY(180deg);' : 'rotateY(0);')};
+`;
+
+export const StyledCardFront = styled.div<CardProps>`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  background: url(${(props) => props.imageUrl}) no-repeat;
+  background-size: cover;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #5e4065;
+`;
+
+export const StyledCardBack = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  border-radius: 8px;
+  overflow: hidden;
   background-color: #e5e5f7;
+  border: 2px solid #5e4065;
   background-image: linear-gradient(
       30deg,
       #5e4065 12%,
@@ -68,9 +97,35 @@ export const StyledBack = styled.div`
   background-position: 0 0, 0 0, 10px 18px, 10px 18px, 0 0, 10px 18px;
 `;
 
-export const StyledFront = styled.div<CardProps>`
-  height: 100%;
-  background: url(${(props) => props.imageUrl}) no-repeat;
-  background-size: cover;
-  opacity: 1;
-`;
+// &.card--flipped {
+//   animation: cardFlip 3s forwards linear;
+// }
+// &.card--unflip {
+//   animation: cardUnFlip 1s forwards linear;
+// }
+
+// @keyframes cardFlip {
+// 0% {
+//   transform: rotateZ(0deg) rotateY(180deg);
+// } 
+// 50% {
+//   transform: rotateZ(-10deg) rotateY(90deg);
+// }
+// 100% {
+//   transform: rotateZ(0deg) rotateY(0deg);
+// }
+
+// }
+
+// @keyframes cardUnFlip {
+// 0% {
+//   transform: rotateZ(0deg) rotateY(0deg);
+// } 
+// 50% {
+//   transform: rotateZ(-10deg) rotateY(90deg);
+// }
+// 100% {
+//   transform: rotateZ(0deg) rotateY(180deg);
+// }
+
+// }

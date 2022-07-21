@@ -1,14 +1,22 @@
-import { StyledCard, StyledBack, StyledFront } from "./Card.styled";
+import {
+  StyledCard,
+  StyledCardFront,
+  StyledCardInner,
+  StyledCardBack,
+} from './Card.styled';
 
 export type CardProps = {
   flipped?: boolean;
   imageUrl: string;
 };
 
-const Card = ({ flipped, imageUrl }: CardProps) => {
+const Card = (props: CardProps) => {
   return (
     <StyledCard>
-      {flipped ? <StyledFront imageUrl={imageUrl} /> : <StyledBack />}
+      <StyledCardInner {...props}>
+        <StyledCardFront {...props} />
+        <StyledCardBack />
+      </StyledCardInner>
     </StyledCard>
   );
 };

@@ -19,7 +19,7 @@ const Template: ComponentStory<typeof Card> = (args) => (
 );
 
 const baseArgs = {
-  imageUrl: '/images/palm.jpeg',
+  imageUrl: 'images/palm.jpg',
 };
 
 export const Back = Template.bind({});
