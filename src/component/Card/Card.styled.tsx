@@ -1,15 +1,15 @@
-import styled from '@emotion/styled';
-import { CardProps } from './Card';
+import styled from '@emotion/styled'
+import { CardProps } from './Card'
 
-const baseColor = '#5e4065';
-const color2 = '#e5e5f7';
+const baseColor = '#5e4065'
+const color2 = '#e5e5f7'
 
 export const StyledCard = styled.li`
   list-style: none;
   cursor: pointer;
   aspect-ratio: 4/6;
   perspective: 1000px;
-`;
+`
 
 export const StyledCardInner = styled.div<CardProps>`
   position: relative;
@@ -48,7 +48,7 @@ export const StyledCardInner = styled.div<CardProps>`
       transform: rotateZ(0deg) rotateY(180deg);
     }
   }
-`;
+`
 
 export const StyledCardFront = styled.div<CardProps>`
   position: absolute;
@@ -61,7 +61,7 @@ export const StyledCardFront = styled.div<CardProps>`
   border-radius: 8px;
   overflow: hidden;
   border: 2px solid #5e4065;
-`;
+`
 
 export const StyledCardBack = styled.div`
   position: absolute;
@@ -123,4 +123,4 @@ export const StyledCardBack = styled.div`
     );
   background-size: 20px 35px;
   background-position: 0 0, 0 0, 10px 18px, 10px 18px, 0 0, 10px 18px;
-`;
+`
