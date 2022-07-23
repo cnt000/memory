@@ -4,9 +4,9 @@ import { CardProps } from './Card'
 const baseColor = '#5e4065'
 const color2 = '#e5e5f7'
 
-export const StyledCard = styled.li`
+export const StyledCard = styled.li<Partial<CardProps>>`
   list-style: none;
-  cursor: pointer;
+  cursor: ${(props) => (Boolean(props.flipped) ? 'initial' : 'pointer')};
   aspect-ratio: 4/6;
   perspective: 1000px;
 `

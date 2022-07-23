@@ -12,7 +12,6 @@ export type CardProps = {
   flipped?: boolean
   locked?: boolean
   imageUrl: string
-  onClick: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
 }
 
 const noop = () => {}
@@ -21,7 +20,7 @@ const Card = ({ index, flipped, imageUrl, locked }: CardProps) => {
   const dispatch = useAppDispatch()
   const onClick = () => dispatch(flipCard(index))
   return (
-    <StyledCard onClick={locked ? noop : onClick}>
+    <StyledCard flipped={flipped} onClick={locked ? noop : onClick}>
       <StyledCardInner flipped={flipped}>
         <StyledCardFront imageUrl={imageUrl} />
         <StyledCardBack />

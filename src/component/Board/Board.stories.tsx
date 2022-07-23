@@ -1,7 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { ReactNode } from 'react'
-
+import { Provider } from 'react-redux'
+import { store } from '../../app/store'
 import Board from './Board'
 
 export default {
@@ -15,9 +16,11 @@ const Wrapper = ({ children }: { children?: ReactNode }) => (
 )
 
 const Template: ComponentStory<typeof Board> = (args) => (
-  <Wrapper>
-    <Board {...args} />
-  </Wrapper>
+  <Provider store={store}>
+    <Wrapper>
+      <Board {...args} />
+    </Wrapper>
+  </Provider>
 )
 
 const grid = (len: number) =>
@@ -27,9 +30,6 @@ const grid = (len: number) =>
       index: i,
       imageUrl: 'images/palm.jpg',
       flipped: Math.random() > 0.5,
-      onClick: (e: React.MouseEvent<HTMLLIElement>) => {
-        action(`Clicked ${i}`)(e)
-      },
     }))
 
 export const Small = Template.bind({})

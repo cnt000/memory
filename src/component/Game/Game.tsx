@@ -6,11 +6,13 @@ import {
   activeCards,
   lockCards,
   resetActive,
+  game,
 } from '../../features/game/gameSlice'
 import Board from '../Board'
 
 const Game = () => {
   const cardsSetup = useAppSelector(cards)
+  const state = useAppSelector(game)
   const active = useAppSelector(activeCards)
   const dispatch = useAppDispatch()
 
@@ -27,11 +29,19 @@ const Game = () => {
     }
   }, [active])
 
-  useEffect(() => {
+  const startGameHanlder = () => {
     dispatch(createGame())
-  }, [])
+  }
 
-  return <Board cards={cardsSetup} />
+  return (
+    <>
+      {state.gameState === 'notStarted' && (
+        <button onClick={startGameHanlder}>start game</button>
+      )}
+      {state.gameState === 'started' && <Board cards={cardsSetup} />}
+      {state.gameState === 'ended' && <p>winner is: ......</p>}
+    </>
+  )
 }
 
 export default Game

@@ -10,8 +10,18 @@ export type Card = {
   flipped?: boolean
   locked?: boolean
   imageUrl: string
-  onClick: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
 }
+
+const images = [
+  'images/ali-karimiboroujeni-6cVU1DcG5dA-unsplash.jpg',
+  'images/artem-mihailov-YBzGaC4sak4-unsplash.jpg',
+  'images/fatane-rahimi-2cXZQ862gws-unsplash.jpg',
+  'images/jasmin-chew-c6AU3Oe2inc-unsplash.jpg',
+  'images/komarov-egor-tA4JkT_21N8-unsplash.jpg',
+  'images/max-griss-4z8BkcEwwWM-unsplash.jpg',
+  'images/palm.jpg',
+  'images/vicky-ng-yIh0i6TYGrs-unsplash.jpg',
+]
 
 export interface GameState {
   gameState: 'notStarted' | 'started' | 'ended'
@@ -54,6 +64,11 @@ const initialState: GameState = {
 //   }
 // );
 
+function shuffle(array: { index: number; imageUrl: string }[]) {
+  array.sort(() => Math.random() - 0.5)
+  return array
+}
+
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
@@ -64,14 +79,17 @@ export const gameSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.cards = Array(12)
+      const unique = Array(6)
         .fill('')
         .map((_, i) => ({
+          imageUrl: images[i],
           index: i,
-          imageUrl: 'images/palm.jpg',
-          onClick: () => {},
         }))
-      state.cards[0].imageUrl = 'images/palm2.jpg'
+      const allCards = [...unique, ...unique]
+      state.cards = shuffle(allCards).map((card, i) => ({
+        ...card,
+        index: i,
+      }))
       state.turn = 0
       state.gameId = `game-${Date.now()}`
       state.activePlayer = 'player1'
@@ -80,7 +98,9 @@ export const gameSlice = createSlice({
     },
     flipCard: (state, action: PayloadAction<number>) => {
       const selectedIndex = action.payload
-      state.cards[selectedIndex].flipped = true
+      if (state.cards[selectedIndex]) {
+        state.cards[selectedIndex].flipped = true
+      }
       state.activeCards.push(selectedIndex)
       state.moves.push(selectedIndex)
     },
@@ -135,6 +155,7 @@ export const { createGame, flipCard, lockCards, resetActive } =
 export const turn = (state: RootState) => state.game.turn
 export const cards = (state: RootState) => state.game.cards
 export const activeCards = (state: RootState) => state.game.activeCards
+export const game = (state: RootState) => state.game
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
