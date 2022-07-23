@@ -1,14 +1,17 @@
 import { StyledBoard } from './Board.styled'
 
 import Card from '../Card'
+import { CardProps } from '../Card/Card'
 
 export type BoardProps = {
-  setup: string[][]
+  cards: CardProps[]
 }
 
-const Board = ({ setup }: BoardProps) => (
-  <StyledBoard setup={setup}>
-    {setup.map((cols) => cols.map((row) => <Card imageUrl={row} />))}
+const Board = ({ cards }: BoardProps) => (
+  <StyledBoard cards={cards}>
+    {cards.map((card, i) => (
+      <Card key={`${i}_${card.imageUrl}`} {...card} />
+    ))}
   </StyledBoard>
 )
 

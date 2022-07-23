@@ -11,7 +11,7 @@ export const StyledCard = styled.li`
   perspective: 1000px;
 `
 
-export const StyledCardInner = styled.div<CardProps>`
+export const StyledCardInner = styled.div<Partial<CardProps>>`
   position: relative;
   width: 100%;
   height: 100%;
@@ -50,7 +50,7 @@ export const StyledCardInner = styled.div<CardProps>`
   }
 `
 
-export const StyledCardFront = styled.div<CardProps>`
+export const StyledCardFront = styled.div<Partial<CardProps>>`
   position: absolute;
   width: 100%;
   height: 100%;

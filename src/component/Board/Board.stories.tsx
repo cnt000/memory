@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 import { ReactNode } from 'react'
 
 import Board from './Board'
@@ -6,6 +7,7 @@ import Board from './Board'
 export default {
   title: 'Memory/Board',
   component: Board,
+  argTypes: { onClick: { action: 'clicked' } },
 } as ComponentMeta<typeof Board>
 
 const Wrapper = ({ children }: { children?: ReactNode }) => (
@@ -18,20 +20,23 @@ const Template: ComponentStory<typeof Board> = (args) => (
   </Wrapper>
 )
 
-const grid = (cols: number, rows: number) =>
-  Array(cols)
+const grid = (len: number) =>
+  Array(len)
     .fill('')
-    .map((_) =>
-      Array(rows)
-        .fill('')
-        .map((_) => 'https://picsum.photos/200/300')
-    )
+    .map((_, i) => ({
+      index: i,
+      imageUrl: 'images/palm.jpg',
+      flipped: Math.random() > 0.5,
+      onClick: (e: React.MouseEvent<HTMLLIElement>) => {
+        action(`Clicked ${i}`)(e)
+      },
+    }))
 
 export const Small = Template.bind({})
-Small.args = { setup: grid(4, 3) }
+Small.args = { cards: grid(12) }
 
 export const Medium = Template.bind({})
-Medium.args = { setup: grid(6, 4) }
+Medium.args = { cards: grid(24) }
 
 export const Big = Template.bind({})
-Big.args = { setup: grid(8, 6) }
+Big.args = { cards: grid(48) }

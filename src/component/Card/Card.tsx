@@ -1,24 +1,33 @@
+import { useAppDispatch } from '../../app/hooks'
+import { flipCard } from '../../features/game/gameSlice'
 import {
   StyledCard,
   StyledCardFront,
   StyledCardInner,
   StyledCardBack,
-} from './Card.styled';
+} from './Card.styled'
 
 export type CardProps = {
-  flipped?: boolean;
-  imageUrl: string;
-};
+  index: number
+  flipped?: boolean
+  locked?: boolean
+  imageUrl: string
+  onClick: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+}
 
-const Card = (props: CardProps) => {
+const noop = () => {}
+
+const Card = ({ index, flipped, imageUrl, locked }: CardProps) => {
+  const dispatch = useAppDispatch()
+  const onClick = () => dispatch(flipCard(index))
   return (
-    <StyledCard>
-      <StyledCardInner {...props}>
-        <StyledCardFront {...props} />
+    <StyledCard onClick={locked ? noop : onClick}>
+      <StyledCardInner flipped={flipped}>
+        <StyledCardFront imageUrl={imageUrl} />
         <StyledCardBack />
       </StyledCardInner>
     </StyledCard>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card
