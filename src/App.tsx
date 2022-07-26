@@ -1,7 +1,5 @@
-import { Counter } from './features/counter/Counter'
 import { AppShell, Header } from '@mantine/core'
-import Card from './component/Card'
-import Board from './component/Board'
+import Turn from './component/Turn'
 import Game from './component/Game'
 import Player from './component/Player'
 import { StyledHeaderInner } from './App.styled'
@@ -25,8 +23,7 @@ function App() {
         <Header height={60} p="xs">
           <StyledHeaderInner>
             <Player player="player1" />
-            {/* <Turn /> */}
-            <div>turno: 0</div>
+            <Turn />
             <Player player="player2" />
           </StyledHeaderInner>
         </Header>

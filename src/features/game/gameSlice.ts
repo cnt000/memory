@@ -65,7 +65,7 @@ const initialState: GameState = {
 // );
 
 function shuffle(array: { index: number; imageUrl: string }[]) {
-  array.sort(() => Math.random() - 0.5)
+  // array.sort(() => Math.random() - 0.5)
   return array
 }
 
@@ -108,10 +108,12 @@ export const gameSlice = createSlice({
       state,
       action: PayloadAction<{ first: number; second: number }>
     ) => {
-      if (action.payload?.first && action.payload?.second) {
+      if (
+        typeof action.payload?.first !== 'undefined' &&
+        typeof action.payload?.second != 'undefined'
+      ) {
         state.cards[action.payload.first].locked = true
         state.cards[action.payload.second].locked = true
-        debugger
         if (state.activePlayer !== '') {
           state[state.activePlayer] += 1
         }
@@ -134,7 +136,10 @@ export const gameSlice = createSlice({
     changeTurn: (state) => {
       state.activePlayer =
         state.activePlayer === 'player1' ? 'player2' : 'player1'
-      state.turn = state.turn || 0 + 1
+      state.turn = (state.turn || 0) + 1
+    },
+    endGame: (state) => {
+      state.gameState = 'ended'
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -154,8 +159,14 @@ export const gameSlice = createSlice({
   // },
 })
 
-export const { createGame, flipCard, lockCards, resetActive, changeTurn } =
-  gameSlice.actions
+export const {
+  createGame,
+  flipCard,
+  lockCards,
+  resetActive,
+  changeTurn,
+  endGame,
+} = gameSlice.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

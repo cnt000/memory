@@ -8,8 +8,10 @@ import {
   resetActive,
   game,
   changeTurn,
+  endGame,
 } from '../../features/game/gameSlice'
 import Board from '../Board'
+import EndGame from '../EndGame'
 import NewGame from '../NewGame'
 
 const Game = () => {
@@ -33,6 +35,15 @@ const Game = () => {
     }
   }, [active])
 
+  useEffect(() => {
+    const lockedCards = state.cards.filter((card) => card.locked)
+    const isFinished =
+      lockedCards.length > 1 && lockedCards.length === state.cards.length
+    if (isFinished) {
+      dispatch(endGame())
+    }
+  }, [active])
+
   const startGameHanlder = () => {
     dispatch(createGame())
   }
@@ -46,7 +57,7 @@ const Game = () => {
         </>
       )}
       {state.gameState === 'started' && <Board cards={cardsSetup} />}
-      {state.gameState === 'ended' && <p>winner is: ......</p>}
+      {state.gameState === 'ended' && <EndGame />}
     </>
   )
 }
