@@ -7,13 +7,15 @@ import {
   lockCards,
   resetActive,
   game,
+  changeTurn,
 } from '../../features/game/gameSlice'
 import Board from '../Board'
+import NewGame from '../NewGame'
 
 const Game = () => {
-  const cardsSetup = useAppSelector(cards)
+  const cardsSetup = useAppSelector(cards) // TODO use game
+  const active = useAppSelector(activeCards) // TODO use game
   const state = useAppSelector(game)
-  const active = useAppSelector(activeCards)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -21,9 +23,11 @@ const Game = () => {
     if (cardsSetup[first]?.imageUrl && cardsSetup[second]?.imageUrl) {
       if (cardsSetup[first]?.imageUrl === cardsSetup[second]?.imageUrl) {
         dispatch(lockCards({ first, second }))
+        dispatch(changeTurn())
       } else {
         setTimeout(() => {
           dispatch(resetActive({ first, second }))
+          dispatch(changeTurn())
         }, 1000)
       }
     }
@@ -36,7 +40,10 @@ const Game = () => {
   return (
     <>
       {state.gameState === 'notStarted' && (
-        <button onClick={startGameHanlder}>start game</button>
+        <>
+          <NewGame />
+          <button onClick={startGameHanlder}>start game</button>
+        </>
       )}
       {state.gameState === 'started' && <Board cards={cardsSetup} />}
       {state.gameState === 'ended' && <p>winner is: ......</p>}

@@ -2,6 +2,8 @@ import styled from '@emotion/styled'
 import { BoardProps } from './Board'
 
 export const StyledBoard = styled.ul<BoardProps>`
+  width: 800px;
+  margin: 0 auto;
   padding: 0;
   display: grid;
   grid-gap: 4%;

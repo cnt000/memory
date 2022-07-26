@@ -3,6 +3,8 @@ import { AppShell, Header } from '@mantine/core'
 import Card from './component/Card'
 import Board from './component/Board'
 import Game from './component/Game'
+import Player from './component/Player'
+import { StyledHeaderInner } from './App.styled'
 
 const grid = (len: number) =>
   Array(len)
@@ -21,7 +23,12 @@ function App() {
       padding="md"
       header={
         <Header height={60} p="xs">
-          {/* Header content */}
+          <StyledHeaderInner>
+            <Player player="player1" />
+            {/* <Turn /> */}
+            <div>turno: 0</div>
+            <Player player="player2" />
+          </StyledHeaderInner>
         </Header>
       }
       styles={(theme) => ({
@@ -33,14 +40,6 @@ function App() {
         },
       })}
     >
-      {/* <div style={{ width: '200px' }}>
-        <Card
-          onClick={() => alert(123)}
-          imageUrl="https://source.unsplash.com/random"
-        />
-      </div>
-      <Board cards={grid(12)} />
-      <Counter /> */}
       <Game />
     </AppShell>
   )

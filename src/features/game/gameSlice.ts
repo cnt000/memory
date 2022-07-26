@@ -111,7 +111,10 @@ export const gameSlice = createSlice({
       if (action.payload?.first && action.payload?.second) {
         state.cards[action.payload.first].locked = true
         state.cards[action.payload.second].locked = true
-        // aumentare i punti al player che gioca
+        debugger
+        if (state.activePlayer !== '') {
+          state[state.activePlayer] += 1
+        }
         state.activeCards = []
       }
     },
@@ -127,6 +130,11 @@ export const gameSlice = createSlice({
         state.cards[action.payload.second].flipped = false
         state.activeCards = []
       }
+    },
+    changeTurn: (state) => {
+      state.activePlayer =
+        state.activePlayer === 'player1' ? 'player2' : 'player1'
+      state.turn = state.turn || 0 + 1
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -146,7 +154,7 @@ export const gameSlice = createSlice({
   // },
 })
 
-export const { createGame, flipCard, lockCards, resetActive } =
+export const { createGame, flipCard, lockCards, resetActive, changeTurn } =
   gameSlice.actions
 
 // The function below is called a selector and allows us to select a value from
