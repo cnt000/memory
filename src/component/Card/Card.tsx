@@ -1,5 +1,5 @@
-import { useAppDispatch } from '../../app/hooks'
-import { flipCard } from '../../features/game/gameSlice'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { flipCard, game, unlockAllCards } from '../../features/game/gameSlice'
 import {
   StyledCard,
   StyledCardFront,
@@ -11,6 +11,7 @@ export type CardProps = {
   index: number
   flipped?: boolean
   locked?: boolean
+  lockAllCards?: boolean
   imageUrl: string
 }
 
@@ -18,9 +19,14 @@ const noop = () => {}
 
 const Card = ({ index, flipped, imageUrl, locked }: CardProps) => {
   const dispatch = useAppDispatch()
-  const onClick = () => dispatch(flipCard(index))
+  const { lockAllCards } = useAppSelector(game)
+  const onClick = () => {
+    dispatch(flipCard(index))
+    dispatch(unlockAllCards())
+  }
+  const hasClick = !locked && !flipped && !lockAllCards
   return (
-    <StyledCard flipped={flipped} onClick={locked ? noop : onClick}>
+    <StyledCard flipped={flipped} onClick={hasClick ? onClick : noop}>
       <StyledCardInner flipped={flipped}>
         <StyledCardFront imageUrl={imageUrl} />
         <StyledCardBack />

@@ -1,7 +1,5 @@
-import { NumberInputHandlers } from '@mantine/core'
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState, AppThunk } from '../../app/store'
-// import { fetchCount } from './counterAPI';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '../../app/store'
 
 export type Move = {}
 
@@ -12,16 +10,50 @@ export type Card = {
   imageUrl: string
 }
 
-const images = [
-  'images/ali-karimiboroujeni-6cVU1DcG5dA-unsplash.jpg',
-  'images/artem-mihailov-YBzGaC4sak4-unsplash.jpg',
-  'images/fatane-rahimi-2cXZQ862gws-unsplash.jpg',
-  'images/jasmin-chew-c6AU3Oe2inc-unsplash.jpg',
-  'images/komarov-egor-tA4JkT_21N8-unsplash.jpg',
-  'images/max-griss-4z8BkcEwwWM-unsplash.jpg',
-  'images/palm.jpg',
-  'images/vicky-ng-yIh0i6TYGrs-unsplash.jpg',
-]
+const peppa = [
+  'Candy_Cat.webp',
+  'Captain_Dog_ID.webp',
+  'Daddy_Pig-0.webp',
+  'Daddy_Rabbit-0.webp',
+  'DannyDog.webp',
+  'Freddy_Fox.webp',
+  'Georgecerdo.webp',
+  'Gerald_Giraffe.webp',
+  'Grandpa_Pig-0.webp',
+  'Granny_Pig_%28Thumbnail%29.webp',
+  'Imageedit_2_8838419266.webp',
+  'Imageedit_5_9473473591.webp',
+  'Mummy_Dog-0.webp',
+  'Mummy_Pig.webp',
+  'Peggi_Panda.webp',
+  'PicsArt_01-20-11.24.03.webp',
+  'PicsArt_01-20-11.26.23.webp',
+  'PicsArt_01-20-11.56.38.webp',
+  'PicsArt_01-21-05.31.05.webp',
+  'PicsArt_01-21-05.56.02.webp',
+  'PicsArt_01-21-06.01.59.webp',
+  'Pippa.webp',
+  'SuzySheep.webp',
+  'Wendy_Wolf.webp',
+  'ZoeZebra.webp',
+  'mamma-klef.webp',
+  'molly-mouse.webp',
+  'opa-klef.webp',
+  'opa-mummel.webp',
+].map((url) => `peppa-pig-cards/${url}`)
+
+const basic = [
+  'ali-karimiboroujeni-6cVU1DcG5dA-unsplash.jpg',
+  'artem-mihailov-YBzGaC4sak4-unsplash.jpg',
+  'fatane-rahimi-2cXZQ862gws-unsplash.jpg',
+  'jasmin-chew-c6AU3Oe2inc-unsplash.jpg',
+  'komarov-egor-tA4JkT_21N8-unsplash.jpg',
+  'max-griss-4z8BkcEwwWM-unsplash.jpg',
+  'palm.jpg',
+  'vicky-ng-yIh0i6TYGrs-unsplash.jpg',
+].map((url) => `basic/${url}`)
+
+const images = peppa.map((url) => `images/${url}`)
 
 export interface GameState {
   gameState: 'notStarted' | 'started' | 'ended'
@@ -33,8 +65,8 @@ export interface GameState {
   gameStartedAt: number
   moves: Move[]
   activeCards: number[]
-  // activeCards: [number, number] | [number] | []
   cards: Card[] | []
+  lockAllCards: boolean
 }
 
 const initialState: GameState = {
@@ -48,6 +80,7 @@ const initialState: GameState = {
   moves: [],
   activeCards: [], // every click, add here if empty or length = 2 else
   cards: [], // new game, fill this
+  lockAllCards: false,
 }
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -65,7 +98,8 @@ const initialState: GameState = {
 // );
 
 function shuffle(array: { index: number; imageUrl: string }[]) {
-  // array.sort(() => Math.random() - 0.5)
+  // TODO IF DEBUG
+  array.sort(() => Math.random() - 0.5)
   return array
 }
 
@@ -74,15 +108,15 @@ export const gameSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    createGame: (state) => {
+    createGame: (state, action: PayloadAction<number>) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      const unique = Array(6)
+      const unique = Array(action.payload / 2)
         .fill('')
         .map((_, i) => ({
-          imageUrl: images[i],
+          imageUrl: images[i % 8],
           index: i,
         }))
       const allCards = [...unique, ...unique]
@@ -97,12 +131,15 @@ export const gameSlice = createSlice({
       state.gameState = 'started'
     },
     flipCard: (state, action: PayloadAction<number>) => {
-      const selectedIndex = action.payload
-      if (state.cards[selectedIndex]) {
-        state.cards[selectedIndex].flipped = true
+      if (state.activeCards.length < 2) {
+        state.lockAllCards = true
+        const selectedIndex = action.payload
+        if (state.cards[selectedIndex]) {
+          state.cards[selectedIndex].flipped = true
+        }
+        state.activeCards.push(selectedIndex)
+        state.moves.push(selectedIndex)
       }
-      state.activeCards.push(selectedIndex)
-      state.moves.push(selectedIndex)
     },
     lockCards: (
       state,
@@ -118,6 +155,7 @@ export const gameSlice = createSlice({
           state[state.activePlayer] += 1
         }
         state.activeCards = []
+        state.lockAllCards = false
       }
     },
     resetActive: (
@@ -128,9 +166,11 @@ export const gameSlice = createSlice({
         typeof action.payload?.first !== 'undefined' &&
         typeof action.payload?.second !== 'undefined'
       ) {
-        state.cards[action.payload.first].flipped = false
-        state.cards[action.payload.second].flipped = false
+        state.activeCards.forEach((card) => {
+          state.cards[card].flipped = false
+        })
         state.activeCards = []
+        state.lockAllCards = false
       }
     },
     changeTurn: (state) => {
@@ -140,6 +180,13 @@ export const gameSlice = createSlice({
     },
     endGame: (state) => {
       state.gameState = 'ended'
+    },
+    resetGame: () => initialState,
+    unlockAllCards: (state) => {
+      state.lockAllCards = false
+    },
+    lockAllCards: (state) => {
+      state.lockAllCards = true
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -166,6 +213,9 @@ export const {
   resetActive,
   changeTurn,
   endGame,
+  resetGame,
+  unlockAllCards,
+  lockAllCards,
 } = gameSlice.actions
 
 // The function below is called a selector and allows us to select a value from

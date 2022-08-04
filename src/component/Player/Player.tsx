@@ -1,5 +1,6 @@
 import { useAppSelector } from '../../app/hooks'
 import { game } from '../../features/game/gameSlice'
+import { StyledPlayer } from './Player.styled'
 
 type PlayerProps = {
   player: 'player1' | 'player2'
@@ -14,10 +15,10 @@ const Player = ({ player }: PlayerProps) => {
   const state = useAppSelector(game)
   const highlighted = state.activePlayer === player
   return (
-    <div>
+    <StyledPlayer highlighted={highlighted}>
       {Boolean(highlighted) && '->'}
       {playerNames[player]} ({state[player]})
-    </div>
+    </StyledPlayer>
   )
 }
 

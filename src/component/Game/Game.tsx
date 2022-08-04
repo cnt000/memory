@@ -9,15 +9,17 @@ import {
   game,
   changeTurn,
   endGame,
+  lockAllCards,
+  unlockAllCards,
 } from '../../features/game/gameSlice'
 import Board from '../Board'
 import EndGame from '../EndGame'
 import NewGame from '../NewGame'
 
 const Game = () => {
+  const state = useAppSelector(game)
   const cardsSetup = useAppSelector(cards) // TODO use game
   const active = useAppSelector(activeCards) // TODO use game
-  const state = useAppSelector(game)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -27,9 +29,11 @@ const Game = () => {
         dispatch(lockCards({ first, second }))
         dispatch(changeTurn())
       } else {
+        dispatch(lockAllCards())
         setTimeout(() => {
           dispatch(resetActive({ first, second }))
           dispatch(changeTurn())
+          dispatch(unlockAllCards())
         }, 1000)
       }
     }
@@ -40,22 +44,15 @@ const Game = () => {
     const isFinished =
       lockedCards.length > 1 && lockedCards.length === state.cards.length
     if (isFinished) {
-      dispatch(endGame())
+      setTimeout(() => {
+        dispatch(endGame())
+      }, 1000)
     }
   }, [active])
 
-  const startGameHanlder = () => {
-    dispatch(createGame())
-  }
-
   return (
     <>
-      {state.gameState === 'notStarted' && (
-        <>
-          <NewGame />
-          <button onClick={startGameHanlder}>start game</button>
-        </>
-      )}
+      {state.gameState === 'notStarted' && <NewGame />}
       {state.gameState === 'started' && <Board cards={cardsSetup} />}
       {state.gameState === 'ended' && <EndGame />}
     </>

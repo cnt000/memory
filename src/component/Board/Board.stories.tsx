@@ -28,7 +28,7 @@ const grid = (len: number) =>
     .fill('')
     .map((_, i) => ({
       index: i,
-      imageUrl: 'images/palm.jpg',
+      imageUrl: 'images/basic/palm.jpg',
       flipped: Math.random() > 0.5,
     }))
 
