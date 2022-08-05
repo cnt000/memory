@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
+import { gameEndedDuration, resetDuration } from '../../confs/setup'
 import {
   cards,
   createGame,
@@ -34,10 +35,10 @@ const Game = () => {
           dispatch(resetActive({ first, second }))
           dispatch(changeTurn())
           dispatch(unlockAllCards())
-        }, 1000)
+        }, resetDuration)
       }
     }
-  }, [active])
+  }, [active, cardsSetup, dispatch])
 
   useEffect(() => {
     const lockedCards = state.cards.filter((card) => card.locked)
@@ -46,9 +47,9 @@ const Game = () => {
     if (isFinished) {
       setTimeout(() => {
         dispatch(endGame())
-      }, 1000)
+      }, gameEndedDuration)
     }
-  }, [active])
+  }, [active, dispatch, state.cards])
 
   return (
     <>

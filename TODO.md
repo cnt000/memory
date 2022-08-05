@@ -11,8 +11,7 @@ new game: select 4x3, 6x4, 8x6 + button start
 
 ---
 
-bloccare tutto finchè non si rigirano le carte sbagliate
+bloccare tutto finchè non si rigirano le carte sbagliate, verificare se servono davvero tutti questi limiti e timer:
 
-sistemare turno e player
-
-fare componenti player e turn e attaccarli allo stato
+allBlocked and timer to click next
+estrarre le cose e metterle in file di CONSTANTS

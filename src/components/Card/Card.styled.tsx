@@ -54,10 +54,12 @@ export const StyledCardFront = styled.div<Partial<CardProps>>`
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   background: url(${(props) => props.imageUrl}) no-repeat;
-  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
   border-radius: 8px;
   overflow: hidden;
   border: 2px solid #5e4065;
@@ -67,7 +69,7 @@ export const StyledCardBack = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transform: rotateY(180deg);
   border-radius: 8px;

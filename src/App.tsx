@@ -1,6 +1,6 @@
 import { AppShell } from '@mantine/core'
-import Header from './component/Header'
-import Game from './component/Game'
+import Header from './components/Header'
+import Game from './components/Game'
 
 function App() {
   return (
