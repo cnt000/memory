@@ -1,17 +1,13 @@
-# componenti:
+segnalare punti con barra che cresce, in giuoco o alla fase finale
 
-Game,
-se notStarted renderizza newGame con 3 bottoni (4x3, 6x4, 8x6)
-se started renderizza board
-se ended renderizza winner is e tasto per settare notStarted
+aggiungere confetti nella fase finale
 
-schermate:
+nomi configurabili e personaggio da scegliere?
 
-new game: select 4x3, 6x4, 8x6 + button start
+deploy on github pages
 
----
+versione grande con più colonne
 
-bloccare tutto finchè non si rigirano le carte sbagliate, verificare se servono davvero tutti questi limiti e timer:
+configurare se peppa o basic
 
-allBlocked and timer to click next
-estrarre le cose e metterle in file di CONSTANTS
+aggiungere pezzi lego

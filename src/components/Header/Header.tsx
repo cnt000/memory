@@ -21,7 +21,7 @@ const Header = () => {
           <>
             <Player player="player1" />
             <Turn />
-            <Player player="player2" />
+            <Player player="player2" right={true} />
           </>
         )}
         {state.gameState === 'ended' && null}

@@ -18,10 +18,10 @@ import EndGame from '../EndGame'
 import NewGame from '../NewGame'
 
 const Game = () => {
-  const state = useAppSelector(game)
-  const cardsSetup = useAppSelector(cards) // TODO use game
-  const active = useAppSelector(activeCards) // TODO use game
   const dispatch = useAppDispatch()
+  const state = useAppSelector(game)
+  const cardsSetup = state.cards
+  const active = state.activeCards
 
   useEffect(() => {
     const [first, second] = active
