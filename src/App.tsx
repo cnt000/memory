@@ -5,14 +5,12 @@ import Game from './components/Game'
 function App() {
   return (
     <AppShell
+      fixed
       padding="md"
       header={<Header />}
       styles={(theme) => ({
         main: {
-          backgroundColor:
-            theme.colorScheme === 'dark'
-              ? theme.colors.dark[8]
-              : theme.colors.gray[0],
+          colorScheme: 'dark',
         },
       })}
     >

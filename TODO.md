@@ -11,3 +11,7 @@ versione grande con più colonne
 configurare se peppa o basic
 
 aggiungere pezzi lego
+
+localstorage + tasto per resettare game
+
+sistemare storybook

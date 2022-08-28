@@ -16,6 +16,7 @@ root.render(
         withGlobalStyles
         withNormalizeCSS
         theme={{
+          colorScheme: 'light',
           breakpoints: {
             xs: 500,
             sm: 800,
