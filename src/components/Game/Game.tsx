@@ -2,9 +2,6 @@ import { useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { gameEndedDuration, resetDuration } from '../../confs/setup'
 import {
-  cards,
-  createGame,
-  activeCards,
   lockCards,
   resetActive,
   game,

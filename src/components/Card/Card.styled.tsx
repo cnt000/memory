@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import { CardProps } from './Card'
 
-const baseColor = '#5e4065'
-const color2 = '#e5e5f7'
+// const baseColor = '#5e4065'
+// const color2 = '#e5e5f7'
 
 export const StyledCard = styled.li<Partial<CardProps>>`
   list-style: none;
