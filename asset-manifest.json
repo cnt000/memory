@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/static/js/main.321375a9.js",
-    "static/js/787.18b835fd.chunk.js": "/static/js/787.18b835fd.chunk.js",
-    "index.html": "/index.html",
-    "main.321375a9.js.map": "/static/js/main.321375a9.js.map",
-    "787.18b835fd.chunk.js.map": "/static/js/787.18b835fd.chunk.js.map"
+    "main.js": "https://cnt000.github.io/memory/static/js/main.3214bbcd.js",
+    "static/js/787.18b835fd.chunk.js": "https://cnt000.github.io/memory/static/js/787.18b835fd.chunk.js",
+    "index.html": "https://cnt000.github.io/memory/index.html",
+    "main.3214bbcd.js.map": "https://cnt000.github.io/memory/static/js/main.3214bbcd.js.map",
+    "787.18b835fd.chunk.js.map": "https://cnt000.github.io/memory/static/js/787.18b835fd.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.321375a9.js"
+    "static/js/main.3214bbcd.js"
   ]
 }
