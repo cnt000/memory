@@ -13,7 +13,7 @@ const Header = () => {
         {state.gameState === 'notStarted' && (
           <>
             <div></div>
-            <Title>Seleziona un tipo di gioco:</Title>
+            <h1>Nora's Memory Game</h1>
             <div></div>
           </>
         )}

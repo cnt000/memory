@@ -5,7 +5,7 @@ import { createGame } from '../../features/game/gameSlice'
 const NewGame = () => {
   const dispatch = useAppDispatch()
   return (
-    <SimpleGrid cols={1} style={{ width: '500px', margin: '50px auto' }}>
+    <SimpleGrid cols={1} style={{ maxWidth: '400px', margin: '50px auto' }}>
       <Button
         size={'xl'}
         style={{ margin: '30px 0' }}

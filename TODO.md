@@ -13,5 +13,3 @@ aggiungere pezzi lego
 localstorage + tasto per resettare game
 
 sistemare storybook
-
-deploy on github pages-> https://www.udemy.com/course/nestjs-zero-to-hero/learn/lecture/26682922#overview

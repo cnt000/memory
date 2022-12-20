@@ -25,10 +25,10 @@ const Template: ComponentStory<typeof Card> = (args) => (
 
 const baseArgs = {
   index: 0,
-  imageUrl: 'images/palm.jpg',
-  onClick: (e: React.MouseEvent<HTMLLIElement>) => {
-    action('my component clicked')(e)
-  },
+  imageUrl: 'images/basic/palm.jpg',
+  flipped: false,
+  locked: false,
+  lockAllCards: false,
 }
 
 export const Back = Template.bind({})
@@ -36,6 +36,3 @@ Back.args = baseArgs
 
 export const Front = Template.bind({})
 Front.args = { ...baseArgs, flipped: true }
-
-export const Locked = Template.bind({})
-Locked.args = { ...baseArgs, flipped: true, locked: true }
