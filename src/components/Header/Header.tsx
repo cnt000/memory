@@ -1,4 +1,4 @@
-import { Header as HeaderMantine, Title } from '@mantine/core'
+import { Header as HeaderMantine } from '@mantine/core'
 import Turn from '../Turn'
 import Player from '../Player'
 import { StyledHeaderInner } from './Header.styled'
