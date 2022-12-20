@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.a72bf031.css","mappings":"AAAA,MACI,sBACJ,CAEA,GAEI,aAA0B,CAA1B,yBAA0B,CAD1B,QAEF","sources":["base.css"],"sourcesContent":[":root {\n    --primaryColor: #228be6;\n}\n\nh1 {\n    margin: 0;\n    color: var(--primaryColor);\n  }"],"names":[],"sourceRoot":""}
