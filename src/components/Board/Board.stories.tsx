@@ -30,6 +30,7 @@ const grid = (len: number) =>
       index: i,
       imageUrl: 'images/basic/palm.jpg',
       flipped: Math.random() > 0.5,
+      cardsLength: len,
     }))
 
 export const Small = Template.bind({})

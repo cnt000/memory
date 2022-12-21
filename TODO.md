@@ -15,3 +15,5 @@ sistemare storybook
 dimensioni griglia su mobile, table, desktop
 
 eslint al commit
+
+autodeploy al push su main

@@ -1,13 +1,14 @@
 import styled from '@emotion/styled'
 import { CardProps } from './Card'
-
-// const baseColor = '#5e4065'
-// const color2 = '#e5e5f7'
+import { rows } from '../../confs/setup'
 
 export const StyledCard = styled.li<Partial<CardProps>>`
   list-style: none;
   cursor: ${(props) => (Boolean(props.flipped) ? 'initial' : 'pointer')};
-  aspect-ratio: 4/6;
+  aspect-ratio: ${(props) => rows[props.cardsLength || 12].aspectRatio};
+  @media (orientation: landscape) {
+    aspect-ratio: 4/4;
+  }
   perspective: 1000px;
 `
 

@@ -10,7 +10,11 @@ export type BoardProps = {
 const Board = ({ cards }: BoardProps) => (
   <StyledBoard cards={cards}>
     {cards.map((card, i) => (
-      <Card key={`${i}_${card.imageUrl}`} {...card} />
+      <Card
+        key={`${i}_${card.imageUrl}`}
+        {...card}
+        cardsLength={cards.length}
+      />
     ))}
   </StyledBoard>
 )

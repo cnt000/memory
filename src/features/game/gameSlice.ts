@@ -9,6 +9,7 @@ export type Card = {
   flipped?: boolean
   locked?: boolean
   imageUrl: string
+  cardsLength: number
 }
 
 export interface GameState {
@@ -63,9 +64,10 @@ const generateCardsSetup = (payload: number, images: string[]) => {
       imageUrl: images[i % images.length],
       index: i,
     }))
-  return shuffle([...unique, ...unique]).map((card, i) => ({
+  return shuffle([...unique, ...unique]).map((card, i, cards) => ({
     ...card,
     index: i,
+    cardsLength: cards.length,
   }))
 }
 

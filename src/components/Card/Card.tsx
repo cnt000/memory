@@ -13,11 +13,12 @@ export type CardProps = {
   locked?: boolean
   lockAllCards?: boolean
   imageUrl: string
+  cardsLength: number
 }
 
 const noop = () => {}
 
-const Card = ({ index, flipped, imageUrl, locked }: CardProps) => {
+const Card = ({ index, flipped, imageUrl, locked, cardsLength }: CardProps) => {
   const dispatch = useAppDispatch()
   const { lockAllCards } = useAppSelector(game)
   const onClick = () => {
@@ -26,7 +27,11 @@ const Card = ({ index, flipped, imageUrl, locked }: CardProps) => {
   }
   const hasClick = !locked && !flipped && !lockAllCards
   return (
-    <StyledCard flipped={flipped} onClick={hasClick ? onClick : noop}>
+    <StyledCard
+      flipped={flipped}
+      onClick={hasClick ? onClick : noop}
+      cardsLength={cardsLength}
+    >
       <StyledCardInner flipped={flipped}>
         <StyledCardFront imageUrl={imageUrl} />
         <StyledCardBack />

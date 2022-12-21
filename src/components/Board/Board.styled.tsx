@@ -1,11 +1,6 @@
 import styled from '@emotion/styled'
+import { rows } from '../../confs/setup'
 import { BoardProps } from './Board'
-
-const rows: Record<string, { cols: number; gap: string }> = {
-  12: { cols: 4, gap: '4%' },
-  24: { cols: 6, gap: '3%' },
-  48: { cols: 8, gap: '2%' },
-}
 
 export const StyledBoard = styled.ul<BoardProps>`
   max-width: 1024px;
@@ -15,6 +10,20 @@ export const StyledBoard = styled.ul<BoardProps>`
   grid-gap: ${(props) => rows[props.cards.length].gap};
   grid-template-columns: repeat(
     ${(props) => rows[props.cards.length].cols},
-    minmax(70px, 1fr)
+    minmax(50px, 1fr)
   );
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(
+      ${(props) => rows[props.cards.length].cols + 2},
+      minmax(50px, 1fr)
+    );
+  }
+
+  @media (orientation: landscape) {
+    grid-template-columns: repeat(
+      ${(props) => rows[props.cards.length].cols + 2},
+      minmax(50px, 1fr)
+    );
+  }
 `

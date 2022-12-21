@@ -13,7 +13,7 @@ const Header = () => {
         {state.gameState === 'notStarted' && (
           <>
             <div></div>
-            <h1>Nora's Memory Game</h1>
+            <h1>NORA's Memory Game</h1>
             <div></div>
           </>
         )}
